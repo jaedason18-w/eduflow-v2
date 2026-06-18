@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — EduFlow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="./css/dashboard.css">
+</head>
+<body>
+
+<!-- Loading screen -->
+<div class="dash-loading" id="dash-loading">
+  <div class="loading-spinner"></div>
+  <p style="color:var(--muted);font-size:.88rem">Loading your dashboard...</p>
+</div>
+
+<!-- Dashboard (hidden until auth confirmed) -->
+<div class="dashboard-layout" id="dashboard" style="display:none">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+    <div class="sidebar-logo">
+      <a href="./index.html" aria-label="EduFlow home">
+        <svg width="140" height="27" viewBox="0 0 155 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="1" width="28" height="28" rx="7" fill="#7c3aed"/>
+          <rect x="6" y="7.5" width="14" height="2.5" rx="1.25" fill="white"/>
+          <rect x="6" y="13.75" width="10" height="2.5" rx="1.25" fill="white"/>
+          <rect x="6" y="20" width="14" height="2.5" rx="1.25" fill="white"/>
+          <path d="M17 15 L21 15" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M19 13.2 L21.2 15 L19 16.8" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <text x="36" y="14" font-family="'Clash Display', sans-serif" font-size="13" font-weight="600" fill="#f3efff" letter-spacing="-0.3">Edu</text>
+          <text x="61" y="14" font-family="'Clash Display', sans-serif" font-size="13" font-weight="600" fill="#a78bfa" letter-spacing="-0.3">Flow</text>
+          <text x="37" y="25" font-family="'Bricolage Grotesque', sans-serif" font-size="7.5" font-weight="300" fill="#6d5a8a" letter-spacing="0.14em">STUDY · TRACK · GROW</text>
+        </svg>
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-label">Main</div>
+        <button class="nav-item active" data-page="overview" aria-current="page">
+          <i class="ri-dashboard-line"></i> Overview
+        </button>
+        <button class="nav-item" data-page="planner">
+          <i class="ri-calendar-schedule-line"></i> Planner
+        </button>
+        <button class="nav-item" data-page="courses">
+          <i class="ri-book-open-line"></i> My Courses
+        </button>
+        <button class="nav-item" data-page="performance">
+          <i class="ri-bar-chart-grouped-line"></i> Performance
+        </button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">Study</div>
+        <button class="nav-item" data-page="study">
+          <i class="ri-lightbulb-line"></i> Study Tools
+        </button>
+        <button class="nav-item" data-page="vault">
+          <i class="ri-archive-drawer-line"></i> Vault
+        </button>
+        <button class="nav-item" data-page="productivity">
+          <i class="ri-flashlight-line"></i> Productivity
+        </button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">Future</div>
+        <button class="nav-item" data-page="career">
+          <i class="ri-briefcase-4-line"></i> Career
+        </button>
+      </div>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="user-card">
+        <div class="user-avatar" id="user-avatar">?</div>
+        <div>
+          <div class="user-name" id="user-name">Loading...</div>
+          <div class="user-plan">Free Plan</div>
+        </div>
+        <button class="user-signout" id="signout-btn" title="Sign out" aria-label="Sign out">
+          <i class="ri-logout-box-r-line"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Main content -->
+  <main class="dash-main" id="dash-main">
+
+    <!-- Mobile topbar -->
+    <div class="mob-topbar">
+      <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Open menu">
+        <i class="ri-menu-line"></i>
+      </button>
+      <svg width="100" height="20" viewBox="0 0 155 30" fill="none" aria-label="EduFlow">
+        <rect x="0" y="1" width="28" height="28" rx="7" fill="#7c3aed"/>
+        <rect x="6" y="7.5" width="14" height="2.5" rx="1.25" fill="white"/>
+        <rect x="6" y="13.75" width="10" height="2.5" rx="1.25" fill="white"/>
+        <rect x="6" y="20" width="14" height="2.5" rx="1.25" fill="white"/>
+        <path d="M17 15 L21 15" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M19 13.2 L21.2 15 L19 16.8" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <text x="36" y="14" font-family="'Clash Display', sans-serif" font-size="13" font-weight="600" fill="#f3efff" letter-spacing="-0.3">Edu</text>
+        <text x="61" y="14" font-family="'Clash Display', sans-serif" font-size="13" font-weight="600" fill="#a78bfa" letter-spacing="-0.3">Flow</text>
+      </svg>
+      <div style="width:32px"></div>
+    </div>
+
+    <!-- ===== OVERVIEW PAGE ===== -->
+    <div class="page-view active" id="page-overview">
+      <div class="dash-topbar">
+        <div class="dash-greeting">
+          <h1>Good morning, <span id="greeting-name" class="grad-text">Student</span> 👋</h1>
+          <p id="greeting-date">Loading date...</p>
+        </div>
+        <div class="dash-actions">
+          <button class="btn-dash ghost"><i class="ri-notification-3-line"></i> Alerts</button>
+          <button class="btn-dash primary" data-page="planner"><i class="ri-add-line"></i> Add Task</button>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div class="stat-card-label">Current GPA</div>
+            <div class="stat-card-icon"><i class="ri-bar-chart-2-line"></i></div>
+          </div>
+          <div class="stat-card-value grad-text">3.74</div>
+          <div class="stat-card-change up"><i class="ri-arrow-up-line"></i> +0.12 this semester</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div class="stat-card-label">Active Courses</div>
+            <div class="stat-card-icon"><i class="ri-book-2-line"></i></div>
+          </div>
+          <div class="stat-card-value">5</div>
+          <div class="stat-card-change">Current semester</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div class="stat-card-label">Pending Tasks</div>
+            <div class="stat-card-icon"><i class="ri-task-line"></i></div>
+          </div>
+          <div class="stat-card-value">3</div>
+          <div class="stat-card-change down">2 due this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div class="stat-card-label">Study Streak</div>
+            <div class="stat-card-icon"><i class="ri-fire-line"></i></div>
+          </div>
+          <div class="stat-card-value" style="color:#fb923c">7</div>
+          <div class="stat-card-change" style="color:#fb923c">days in a row 🔥</div>
+        </div>
+      </div>
+
+      <!-- Main grid -->
+      <div class="dash-grid">
+        <!-- Courses -->
+        <div class="dash-card">
+          <div class="card-header">
+            <div class="card-title"><i class="ri-book-open-line" style="color:var(--p300);margin-right:6px"></i>My Courses</div>
+            <button class="card-action" data-page="courses">View all →</button>
+          </div>
+          <div class="course-list">
+            <div class="course-item">
+              <div class="course-dot" style="background:#8b5cf6"></div>
+              <div class="course-name">CSC 312 — Operating Systems</div>
+              <div class="course-progress-wrap"><div class="course-progress" style="width:88%"></div></div>
+              <div class="course-grade">A</div>
+            </div>
+            <div class="course-item">
+              <div class="course-dot" style="background:#22d3ee"></div>
+              <div class="course-name">MTH 201 — Calculus II</div>
+              <div class="course-progress-wrap"><div class="course-progress" style="width:76%"></div></div>
+              <div class="course-grade">B+</div>
+            </div>
+            <div class="course-item">
+              <div class="course-dot" style="background:#a3e635"></div>
+              <div class="course-name">STA 201 — Statistics</div>
+              <div class="course-progress-wrap"><div class="course-progress" style="width:92%"></div></div>
+              <div class="course-grade">A</div>
+            </div>
+            <div class="course-item">
+              <div class="course-dot" style="background:#fb923c"></div>
+              <div class="course-name">PHY 205 — Electromagnetism</div>
+              <div class="course-progress-wrap"><div class="course-progress" style="width:54%;background:linear-gradient(90deg,#f97316,#fb923c)"></div></div>
+              <div class="course-grade" style="color:#fb923c">C+</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming deadlines -->
+        <div class="dash-card">
+          <div class="card-header">
+            <div class="card-title"><i class="ri-alarm-line" style="color:var(--p300);margin-right:6px"></i>Upcoming Deadlines</div>
+            <button class="card-action" data-page="planner">View all →</button>
+          </div>
+          <div class="deadline-list">
+            <div class="deadline-item">
+              <div class="deadline-icon urgent"><i class="ri-file-text-line"></i></div>
+              <div><div class="deadline-name">MTH 201 Assignment 4</div><div class="deadline-course">Mathematics</div></div>
+              <div class="deadline-date urgent">Tomorrow</div>
+            </div>
+            <div class="deadline-item">
+              <div class="deadline-icon exam"><i class="ri-file-warning-line"></i></div>
+              <div><div class="deadline-name">PHY 205 Midterm Exam</div><div class="deadline-course">Physics</div></div>
+              <div class="deadline-date soon">In 3 days</div>
+            </div>
+            <div class="deadline-item">
+              <div class="deadline-icon quiz"><i class="ri-questionnaire-line"></i></div>
+              <div><div class="deadline-name">CSC 312 Quiz</div><div class="deadline-course">Computer Science</div></div>
+              <div class="deadline-date">Jun 22</div>
+            </div>
+            <div class="deadline-item">
+              <div class="deadline-icon assignment"><i class="ri-file-text-line"></i></div>
+              <div><div class="deadline-name">STA 201 Lab Report</div><div class="deadline-course">Statistics</div></div>
+              <div class="deadline-date">Jun 28</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second row -->
+      <div class="dash-grid three">
+        <!-- GPA card -->
+        <div class="dash-card">
+          <div class="card-header">
+            <div class="card-title"><i class="ri-line-chart-line" style="color:var(--p300);margin-right:6px"></i>GPA Trend</div>
+            <button class="card-action" data-page="performance">Details →</button>
+          </div>
+          <div class="gpa-display">
+            <div class="gpa-big">3.74</div>
+            <div class="gpa-label">Cumulative GPA</div>
+            <div class="gpa-trend"><i class="ri-arrow-up-line"></i> +0.12 this semester</div>
+          </div>
+          <div class="mini-bars">
+            <div class="mini-bar" style="height:55%"></div>
+            <div class="mini-bar" style="height:70%"></div>
+            <div class="mini-bar" style="height:60%"></div>
+            <div class="mini-bar" style="height:80%"></div>
+            <div class="mini-bar" style="height:75%"></div>
+            <div class="mini-bar active" style="height:90%"></div>
+          </div>
+          <div class="mini-bar-labels">
+            <div class="mbl">S1</div><div class="mbl">S2</div><div class="mbl">S3</div>
+            <div class="mbl">S4</div><div class="mbl">S5</div><div class="mbl">S6</div>
+          </div>
+        </div>
+
+        <!-- Streak card -->
+        <div class="dash-card">
+          <div class="card-header">
+            <div class="card-title"><i class="ri-fire-line" style="color:#fb923c;margin-right:6px"></i>Study Streak</div>
+          </div>
+          <div class="streak-display">
+            <div class="streak-num">7</div>
+            <div class="streak-label">days in a row</div>
+          </div>
+          <div class="streak-days">
+            <div class="streak-day done">M</div>
+            <div class="streak-day done">T</div>
+            <div class="streak-day done">W</div>
+            <div class="streak-day done">T</div>
+            <div class="streak-day done">F</div>
+            <div class="streak-day done">S</div>
+            <div class="streak-day today">S</div>
+          </div>
+          <div style="margin-top:1rem;padding:.75rem;background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.2);border-radius:8px;font-size:.82rem;color:#fb923c;text-align:center">
+            🎯 Keep it up! 3 more days for a new record
+          </div>
+        </div>
+
+        <!-- Vault preview -->
+        <div class="dash-card">
+          <div class="card-header">
+            <div class="card-title"><i class="ri-archive-drawer-line" style="color:var(--p300);margin-right:6px"></i>Recent Notes</div>
+            <button class="card-action" data-page="vault">Open Vault →</button>
+          </div>
+          <div class="vault-items">
+            <div class="vault-item">
+              <div class="vault-item-icon"><i class="ri-file-text-line"></i></div>
+              <div style="flex:1"><div class="vault-item-name">OS Week 8 Notes</div><div class="vault-item-meta">CSC 312 · 2 days ago</div></div>
+              <div class="vault-item-size">142KB</div>
+            </div>
+            <div class="vault-item">
+              <div class="vault-item-icon"><i class="ri-file-pdf-line"></i></div>
+              <div style="flex:1"><div class="vault-item-name">Calculus Past Questions</div><div class="vault-item-meta">MTH 201 · 4 days ago</div></div>
+              <div class="vault-item-size">2.1MB</div>
+            </div>
+            <div class="vault-item">
+              <div class="vault-item-icon"><i class="ri-file-text-line"></i></div>
+              <div style="flex:1"><div class="vault-item-name">Stats Lab 3 Report</div><div class="vault-item-meta">STA 201 · 1 week ago</div></div>
+              <div class="vault-item-size">88KB</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== OTHER PAGES (placeholders) ===== -->
+    <div class="page-view" id="page-planner">
+      <div class="dash-topbar"><div class="dash-greeting"><h1>📅 Planner</h1><p>Manage your deadlines, timetable and tasks</p></div></div>
+      <div class="dash-card"><div class="empty-state"><i class="ri-calendar-schedule-line"></i><p>Your planner is empty.<br>Add your first task to get started.</p><button class="btn-dash primary" style="margin-top:1rem;border:none;cursor:pointer"><i class="ri-add-line"></i> Add Task</button></div></div>
+    </div>
+
+    <div class="page-view" id="page-courses">
+      <div class="dash-topbar"><div class="dash-greeting"><h1>📚 My Courses</h1><p>All your active courses this semester</p></div><div class="dash-actions"><button class="btn-dash primary"><i class="ri-add-line"></i> Add Course</button></div></div>
+      <div class="dash-card"><div class="empty-state"><i class="ri-book-open-line"></i><p>Add your courses to start tracking grades and progress.</p></div></div>
+    </div>
+
+    <div class="page-view" id="page-performance">
+      <div class="dash-topbar"><div class="dash-greeting"><h1>📊 Performance</h1><p>Track your GPA and academic progress</p></div></div>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <div class="card-header"><div class="card-title">GPA Overview</div></div>
+          <div class="gpa-display">
+            <div class="gpa-big">3.74</div>
+            <div class="gpa-label">Cumulative GPA</div>
+            <div class="gpa-trend"><i class="ri-arrow-up-line"></i> On track for First Class</div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="card-header"><div class="card-title">⚠️ Weak Subject Alert</div></div>
+          <div style="padding:.9rem;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:10px;font-size:.85rem;color:var(--muted);line-height:1.7">PHY 205 is at 54%. You need <strong style="color:#fb923c">68% on finals</strong> to achieve a B grade. Consider extra study time this week.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-view" id="page-study">
+      <div class="dash-topbar"><div class="dash-greeting"><h1>💡 Study Tools</h1><p>Flashcards, quizzes and revision schedules</p></div></div>
+      <div class="dash-card"><div class="empty-state"><i class="ri-lightbulb-line"></i><p>Upload your notes to generate flashcards and quizzes automatically.</p></div></div>
+    </div>
+
+    <div class="page-view" id="page-vault">
+      <div class="dash-topbar"><div class="dash-greeting"><h1>🗄️ Academic Vault</h1><p>All your notes and materials — preserved forever</p></div><div class="dash-actions"><button class="btn-dash primary"><i class="ri-upload-2-line"></i> Upload</button></div></div>
+      <div class="dash-card"><div class="empty-state"><i class="ri-archive-drawer-line"></i><p>Your vault is empty. Upload your first note or document to start building your lifelong archive.</p></div></div>
+    </div>
+
+    <div class="page-view" id="page-productivity">
+      <div class="dash-topbar"><div class="dash-greeting"><h1>⚡ Productivity</h1><p>Streaks, habits and burnout prevention</p></div></div>
+      <div class="dash-card">
+        <div class="card-header"><div class="card-title">Study Streak</div></div>
+        <div class="streak-display"><div class="streak-num">7</div><div class="streak-label">days in a row</div></div>
+        <div class="streak-days" style="margin-top:1rem">
+          <div class="streak-day done">M</div><div class="streak-day done">T</div><div class="streak-day done">W</div>
+          <div class="streak-day done">T</div><div class="streak-day done">F</div><div class="streak-day done">S</div>
+          <div class="streak-day today">S</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-view" id="page-career">
+      <div class="dash-topbar"><div class="dash-greeting"><h1>💼 Career Launchpad</h1><p>Build your portfolio and prepare for the real world</p></div></div>
+      <div class="dash-card"><div class="empty-state"><i class="ri-briefcase-4-line"></i><p>Your career profile is empty. Start by adding your skills and projects.</p></div></div>
+    </div>
+
+  </main>
+</div>
+
+<script type="module" src="./js/dashboard.js"></script>
+</body>
+</html>

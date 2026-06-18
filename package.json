@@ -1,0 +1,30 @@
+{
+  "name": "eduflow",
+  "version": "1.0.0",
+  "description": "EduFlow — Your Academic Operating System. An AI-powered platform helping students manage courses, track GPA, build study plans, and preserve their learning for life.",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "start": "npx serve .",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "student",
+    "education",
+    "gpa-tracker",
+    "study-planner",
+    "academic",
+    "supabase"
+  ],
+  "author": "EduFlow",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

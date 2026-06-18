@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account — EduFlow</title>
+<meta name="description" content="Create your free EduFlow account and start managing your academic journey.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+
+<div class="auth-page">
+
+  <!-- Left panel -->
+  <div class="auth-left">
+    <div class="auth-left-inner">
+      <a href="../index.html" class="auth-logo" aria-label="EduFlow home">
+        <svg width="155" height="30" viewBox="0 0 155 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="1" width="28" height="28" rx="7" fill="#7c3aed"/>
+          <rect x="6" y="7.5" width="14" height="2.5" rx="1.25" fill="white"/>
+          <rect x="6" y="13.75" width="10" height="2.5" rx="1.25" fill="white"/>
+          <rect x="6" y="20" width="14" height="2.5" rx="1.25" fill="white"/>
+          <path d="M17 15 L21 15" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M19 13.2 L21.2 15 L19 16.8" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <text x="36" y="14" font-family="'Clash Display', sans-serif" font-size="13" font-weight="600" fill="#f3efff" letter-spacing="-0.3">Edu</text>
+          <text x="61" y="14" font-family="'Clash Display', sans-serif" font-size="13" font-weight="600" fill="#a78bfa" letter-spacing="-0.3">Flow</text>
+          <text x="37" y="25" font-family="'Bricolage Grotesque', sans-serif" font-size="7.5" font-weight="300" fill="#6d5a8a" letter-spacing="0.14em">STUDY · TRACK · GROW</text>
+        </svg>
+      </a>
+
+      <div class="auth-form-wrap">
+        <h1 class="auth-title">Create your account</h1>
+        <p class="auth-sub">Free forever. No credit card required.</p>
+
+        <div id="auth-error" class="auth-error" style="display:none" role="alert"></div>
+
+        <!-- Google -->
+        <button class="btn-google" id="google-signup" type="button" aria-label="Sign up with Google">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
+            <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
+            <path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+            <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+          </svg>
+          Sign up with Google
+        </button>
+
+        <div class="or-divider" aria-hidden="true">or sign up with email</div>
+
+        <!-- Step indicator -->
+        <div class="reg-steps" aria-label="Registration progress">
+          <div class="reg-step active" id="rs1">1</div>
+          <div class="rs-line" id="rl1"></div>
+          <div class="reg-step" id="rs2">2</div>
+          <div class="rs-line" id="rl2"></div>
+          <div class="reg-step" id="rs3">3</div>
+        </div>
+
+        <!-- Step 1: Account -->
+        <div id="reg-step1">
+          <div class="step-title-sm">Account details</div>
+          <form id="step1-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First name <span aria-hidden="true" style="color:#f87171">*</span></label>
+                <input type="text" id="fname" placeholder="Adaeze" autocomplete="given-name" required/>
+                <div class="field-error" id="fname-error" role="alert">Required</div>
+              </div>
+              <div class="form-group">
+                <label for="lname">Last name <span aria-hidden="true" style="color:#f87171">*</span></label>
+                <input type="text" id="lname" placeholder="Okafor" autocomplete="family-name" required/>
+                <div class="field-error" id="lname-error" role="alert">Required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address <span aria-hidden="true" style="color:#f87171">*</span></label>
+              <input type="email" id="email" placeholder="you@university.edu" autocomplete="email" required/>
+              <div class="field-error" id="email-error" role="alert">Enter a valid email address.</div>
+            </div>
+            <div class="form-group">
+              <label for="pwd">Password <span aria-hidden="true" style="color:#f87171">*</span></label>
+              <div class="pwd-wrapper">
+                <input type="password" id="pwd" placeholder="Min 8 chars, 1 number, 1 symbol" autocomplete="new-password" required/>
+                <button class="pwd-toggle" id="pwd-toggle" type="button" aria-label="Show password">
+                  <i class="ri-eye-line"></i>
+                </button>
+              </div>
+              <div class="pwd-strength"><div class="pwd-strength-fill" id="pwd-strength-fill"></div></div>
+              <div class="pwd-hint" id="pwd-strength-hint" aria-live="polite"></div>
+              <div class="field-error" id="pwd-error" role="alert">Min 8 chars with a number and symbol.</div>
+            </div>
+            <button class="btn-submit" id="s1-next" type="button">Continue →</button>
+          </form>
+        </div>
+
+        <!-- Step 2: Academic profile -->
+        <div id="reg-step2" style="display:none">
+          <div class="step-title-sm">Academic profile</div>
+          <div class="form-group">
+            <label for="uni">University <span aria-hidden="true" style="color:#f87171">*</span></label>
+            <input type="text" id="uni" placeholder="e.g. University of Lagos" autocomplete="organization" required/>
+            <div class="field-error" id="uni-error" role="alert">Required</div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dept">Department</label>
+              <input type="text" id="dept" placeholder="e.g. Computer Science"/>
+            </div>
+            <div class="form-group">
+              <label for="yr">Year <span aria-hidden="true" style="color:#f87171">*</span></label>
+              <select id="yr" required>
+                <option value="">Select</option>
+                <option value="y1">Year 1</option>
+                <option value="y2">Year 2</option>
+                <option value="y3">Year 3</option>
+                <option value="y4">Year 4</option>
+                <option value="y5">Year 5</option>
+                <option value="pg">Postgraduate</option>
+              </select>
+              <div class="field-error" id="yr-error" role="alert">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="deg">Degree type</label>
+            <select id="deg">
+              <option value="">Select</option>
+              <option value="bsc">Bachelor's (B.Sc / B.Eng / B.A)</option>
+              <option value="msc">Master's (M.Sc / MBA)</option>
+              <option value="phd">PhD / Doctorate</option>
+              <option value="hnd">HND / Diploma</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button class="btn-back" id="s2-back" type="button">← Back</button>
+            <button class="btn-submit" id="s2-next" type="button">Continue →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Goals -->
+        <div id="reg-step3" style="display:none">
+          <div class="step-title-sm">Your goals</div>
+          <div class="form-group">
+            <label>What matters most to you?</label>
+            <div class="check-group" id="goals" role="group" aria-label="Select your academic goals">
+              <label class="check-item"><input type="checkbox" name="goals" value="gpa"><div class="check-icon" aria-hidden="true"><span class="check-mark">✓</span></div>Improve GPA</label>
+              <label class="check-item"><input type="checkbox" name="goals" value="org"><div class="check-icon" aria-hidden="true"><span class="check-mark">✓</span></div>Stay organized</label>
+              <label class="check-item"><input type="checkbox" name="goals" value="study"><div class="check-icon" aria-hidden="true"><span class="check-mark">✓</span></div>Study smarter</label>
+              <label class="check-item"><input type="checkbox" name="goals" value="assign"><div class="check-icon" aria-hidden="true"><span class="check-mark">✓</span></div>Track assignments</label>
+              <label class="check-item"><input type="checkbox" name="goals" value="habit"><div class="check-icon" aria-hidden="true"><span class="check-mark">✓</span></div>Build study habits</label>
+              <label class="check-item"><input type="checkbox" name="goals" value="vault"><div class="check-icon" aria-hidden="true"><span class="check-mark">✓</span></div>Archive notes</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="source">How did you hear about EduFlow?</label>
+            <select id="source">
+              <option value="">Select</option>
+              <option value="social">Social media</option>
+              <option value="whatsapp">WhatsApp / Telegram</option>
+              <option value="friend">Friend or classmate</option>
+              <option value="search">Google / Search</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button class="btn-back" id="s3-back" type="button">← Back</button>
+            <button class="btn-submit" id="s3-submit" type="button">🚀 Create my account</button>
+          </div>
+        </div>
+
+        <!-- Success -->
+        <div id="reg-success" style="display:none">
+          <div class="reg-success-wrap">
+            <div class="success-icon-wrap"><i class="ri-graduation-cap-line"></i></div>
+            <h2>You're in!</h2>
+            <p id="reg-success-msg">Check your email to confirm your account.</p>
+            <a href="./login.html" class="btn-submit" style="text-align:center;text-decoration:none;display:block">Go to Sign In →</a>
+          </div>
+        </div>
+
+        <p class="auth-switch" id="signin-link">Already have an account? <a href="./login.html">Sign in</a></p>
+        <p style="text-align:center;font-size:.72rem;color:#6d5a8a;margin-top:.75rem">By signing up you agree to our <a href="#" style="color:#a78bfa;text-decoration:none">Terms</a> & <a href="#" style="color:#a78bfa;text-decoration:none">Privacy Policy</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right panel -->
+  <div class="auth-right" aria-hidden="true">
+    <div class="auth-right-inner">
+      <div class="auth-features">
+        <h3 style="font-family:'Clash Display',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1.75rem">Everything you need to <span style="background:linear-gradient(135deg,#a78bfa,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">ace your degree</span></h3>
+        <div class="auth-feature-list">
+          <div class="af-item"><div class="af-icon"><i class="ri-calendar-schedule-line"></i></div><div><div class="af-title">Academic Planner</div><div class="af-desc">Courses, deadlines & exams organized</div></div></div>
+          <div class="af-item"><div class="af-icon"><i class="ri-bar-chart-grouped-line"></i></div><div><div class="af-title">Live GPA Tracker</div><div class="af-desc">Real-time performance monitoring</div></div></div>
+          <div class="af-item"><div class="af-icon"><i class="ri-archive-drawer-line"></i></div><div><div class="af-title">Academic Vault</div><div class="af-desc">All your notes, preserved for life</div></div></div>
+          <div class="af-item"><div class="af-icon"><i class="ri-flashlight-line"></i></div><div><div class="af-title">Productivity Engine</div><div class="af-desc">Streaks, habits & burnout prevention</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module" src="../js/register.js"></script>
+</body>
+</html>

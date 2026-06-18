@@ -1,0 +1,165 @@
+/* ============================================
+   EduFlow — Auth Pages (login & register)
+   ============================================ */
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ---- LEFT PANEL ---- */
+.auth-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  min-height: 100vh;
+}
+
+.auth-left-inner {
+  width: 100%;
+  max-width: 440px;
+}
+
+.auth-logo {
+  display: inline-block;
+  margin-bottom: 2.5rem;
+  text-decoration: none;
+}
+
+.auth-form-wrap { width: 100%; }
+
+.auth-title {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 1.8rem; font-weight: 700;
+  letter-spacing: -.02em; margin-bottom: .4rem;
+}
+
+.auth-sub { font-size: .9rem; color: var(--muted); margin-bottom: 1.75rem; font-weight: 300; }
+
+.forgot-link { font-size: .78rem; color: var(--p300); text-decoration: none; }
+.forgot-link:hover { color: var(--p200); }
+
+.auth-switch {
+  text-align: center; font-size: .83rem;
+  color: var(--muted); margin-top: 1.25rem;
+}
+.auth-switch a { color: var(--p300); text-decoration: none; font-weight: 500; }
+.auth-switch a:hover { color: var(--p200); }
+
+/* Step indicator for register */
+.reg-steps {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 1.75rem;
+}
+.reg-step {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Clash Display', sans-serif; font-size: .78rem; font-weight: 600;
+  border: 1.5px solid var(--border); color: var(--muted);
+  transition: all .3s; flex-shrink: 0;
+}
+.reg-step.active {
+  background: linear-gradient(135deg, var(--p500), var(--accent));
+  color: #fff; border-color: transparent;
+  box-shadow: 0 0 14px var(--glow);
+}
+.reg-step.done { background: rgba(139,92,246,.2); color: var(--p300); border-color: rgba(139,92,246,.3); }
+.rs-line { flex: 1; height: 1px; background: var(--border); transition: background .4s; }
+.rs-line.done { background: linear-gradient(90deg, var(--p500), var(--accent)); opacity: .6; }
+
+.step-title-sm {
+  font-size: .72rem; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--p400); margin-bottom: 1.1rem;
+}
+
+/* Success screen */
+.reg-success-wrap { text-align: center; padding: 1.5rem 0; }
+.success-icon-wrap {
+  width: 70px; height: 70px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--p500), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; color: #fff; margin: 0 auto 1.25rem;
+  box-shadow: 0 0 30px var(--glow);
+}
+.reg-success-wrap h2 {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 1.5rem; font-weight: 700; margin-bottom: .5rem;
+}
+.reg-success-wrap p { font-size: .9rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.65; }
+
+/* ---- RIGHT PANEL ---- */
+.auth-right {
+  background: var(--bg2);
+  display: flex; align-items: center; justify-content: center;
+  padding: 3rem 2rem; position: relative; overflow: hidden;
+}
+.auth-right::before {
+  content: '';
+  position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(139,92,246,.12), transparent 70%);
+  pointer-events: none;
+}
+
+.auth-right-inner { position: relative; z-index: 1; max-width: 420px; width: 100%; }
+
+/* Quote style (login) */
+.auth-quote {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem; margin-bottom: 2rem;
+}
+.quote-icon {
+  font-size: 2rem; color: var(--p400); margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--p300), var(--accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.auth-quote p { font-size: .95rem; color: var(--p100); line-height: 1.7; margin-bottom: 1.25rem; font-style: italic; }
+.quote-author { display: flex; align-items: center; gap: 10px; }
+.quote-av {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(139,92,246,.2); color: var(--p300);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Clash Display', sans-serif; font-weight: 700; font-size: .78rem;
+  flex-shrink: 0;
+}
+.quote-name { font-weight: 600; font-size: .86rem; }
+.quote-role { font-size: .75rem; color: var(--muted); }
+
+.auth-stats {
+  display: flex; gap: 1.5rem; justify-content: center;
+}
+.auth-stat { text-align: center; }
+.auth-stat-n {
+  font-family: 'Clash Display', sans-serif; font-size: 2rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--p300), var(--accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1;
+}
+.auth-stat-l { font-size: .75rem; color: var(--muted); margin-top: 4px; }
+
+/* Feature list (register) */
+.auth-feature-list { display: flex; flex-direction: column; gap: 1.1rem; }
+.af-item { display: flex; gap: 1rem; align-items: flex-start; }
+.af-icon {
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  background: rgba(139,92,246,.18); display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem; color: var(--p300);
+}
+.af-title { font-weight: 600; font-size: .9rem; margin-bottom: .15rem; }
+.af-desc { font-size: .82rem; color: var(--muted); }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .auth-page { grid-template-columns: 1fr; }
+  .auth-right { display: none; }
+  .auth-left { border-right: none; }
+}
+
+@media (max-width: 480px) {
+  .auth-left { padding: 2rem 1.25rem; }
+  .auth-title { font-size: 1.5rem; }
+}

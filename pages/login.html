@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In — EduFlow</title>
+<meta name="description" content="Sign in to your EduFlow account and continue your academic journey.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+
+<div class="auth-page">
+
+  <!-- Left panel -->
+  <div class="auth-left">
+    <div class="auth-left-inner">
+      <a href="../index.html" class="auth-logo" aria-label="EduFlow home">
+        <svg width="155" height="30" viewBox="0 0 155 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="1" width="28" height="28" rx="7" fill="#7c3aed"/>
+          <rect x="6" y="7.5" width="14" height="2.5" rx="1.25" fill="white"/>
+          <rect x="6" y="13.75" width="10" height="2.5" rx="1.25" fill="white"/>
+          <rect x="6" y="20" width="14" height="2.5" rx="1.25" fill="white"/>
+          <path d="M17 15 L21 15" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M19 13.2 L21.2 15 L19 16.8" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <text x="36" y="14" font-family="'Clash Display', sans-serif" font-size="13" font-weight="600" fill="#f3efff" letter-spacing="-0.3">Edu</text>
+          <text x="61" y="14" font-family="'Clash Display', sans-serif" font-size="13" font-weight="600" fill="#a78bfa" letter-spacing="-0.3">Flow</text>
+          <text x="37" y="25" font-family="'Bricolage Grotesque', sans-serif" font-size="7.5" font-weight="300" fill="#6d5a8a" letter-spacing="0.14em">STUDY · TRACK · GROW</text>
+        </svg>
+      </a>
+
+      <div class="auth-form-wrap">
+        <h1 class="auth-title">Welcome back</h1>
+        <p class="auth-sub">Sign in to continue your academic journey.</p>
+
+        <!-- Global error -->
+        <div id="auth-error" class="auth-error" style="display:none" role="alert"></div>
+
+        <!-- Google -->
+        <button class="btn-google" id="google-signin" type="button" aria-label="Continue with Google">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
+            <path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
+            <path d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+            <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <div class="or-divider" aria-hidden="true">or sign in with email</div>
+
+        <!-- Form -->
+        <form id="login-form" novalidate>
+          <div class="form-group">
+            <label for="email">Email address <span aria-hidden="true" style="color:#f87171">*</span></label>
+            <input type="email" id="email" name="email" placeholder="you@university.edu"
+              autocomplete="email" required aria-required="true" aria-describedby="email-error"/>
+            <div class="field-error" id="email-error" role="alert">Please enter a valid email address.</div>
+          </div>
+
+          <div class="form-group">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <label for="password">Password <span aria-hidden="true" style="color:#f87171">*</span></label>
+              <a href="./forgot-password.html" class="forgot-link">Forgot password?</a>
+            </div>
+            <div class="pwd-wrapper">
+              <input type="password" id="password" name="password" placeholder="Your password"
+                autocomplete="current-password" required aria-required="true" aria-describedby="password-error"/>
+              <button class="pwd-toggle" id="pwd-toggle" type="button" aria-label="Show password" aria-pressed="false">
+                <i class="ri-eye-line"></i>
+              </button>
+            </div>
+            <div class="field-error" id="password-error" role="alert">Please enter your password.</div>
+          </div>
+
+          <button class="btn-submit" id="signin-btn" type="submit">
+            Sign in to EduFlow
+          </button>
+        </form>
+
+        <p class="auth-switch">Don't have an account? <a href="../index.html#cta">Sign up free</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right panel -->
+  <div class="auth-right" aria-hidden="true">
+    <div class="auth-right-inner">
+      <div class="auth-quote">
+        <div class="quote-icon"><i class="ri-double-quotes-l"></i></div>
+        <p>"EduFlow completely changed how I manage my academic life. My GPA went from 3.1 to 3.8 in one semester."</p>
+        <div class="quote-author">
+          <div class="quote-av">AO</div>
+          <div>
+            <div class="quote-name">Adaeze O.</div>
+            <div class="quote-role">Computer Science, Year 3 — UNILAG</div>
+          </div>
+        </div>
+      </div>
+      <div class="auth-stats">
+        <div class="auth-stat"><div class="auth-stat-n">6+</div><div class="auth-stat-l">Core modules</div></div>
+        <div class="auth-stat"><div class="auth-stat-n">∞</div><div class="auth-stat-l">Notes archived</div></div>
+        <div class="auth-stat"><div class="auth-stat-n">1</div><div class="auth-stat-l">Platform</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module" src="../js/login.js"></script>
+</body>
+</html>
