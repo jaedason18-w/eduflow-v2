@@ -2032,50 +2032,179 @@
             margin: 0 auto 1.75rem
         }
         /* RESPONSIVE */
+        /* =========================
+   TABLET + MOBILE
+========================= */
         
-        @media(max-width:900px) {
-            .prob-inner,
-            .vault-inner,
-            .track-inner {
-                grid-template-columns: 1fr;
-                gap: 2.5rem
+        @media (max-width: 900px) {
+            html,
+            body {
+                overflow-x: hidden;
             }
-            .feat-card.wide {
-                grid-column: span 1
+            nav {
+                padding: 1rem 16px;
             }
-            .steps-new {
-                gap: 0
-            }
-            .steps::before {
-                display: none
-            }
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                max-width: 420px;
-                margin: 0 auto
-            }
-            .plan-card.popular {
-                transform: none
+            nav svg {
+                width: 130px;
+                height: auto;
             }
             nav .nav-links,
             .nav-right .btn-nav,
             .nav-right .btn-signin-nav {
-                display: none
+                display: none;
             }
             .hamburger {
-                display: flex
+                display: flex;
+            }
+            .mobile-menu {
+                position: fixed;
+                top: 64px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            .hero {
+                padding: 8rem 1.5rem 4rem;
+            }
+            .hero h1 {
+                max-width: 100%;
+            }
+            .prob-inner,
+            .vault-inner,
+            .track-inner {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .feat-grid {
+                grid-template-columns: 1fr;
+            }
+            .feat-card.wide {
+                grid-column: span 1;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+            .plan-card.popular {
+                transform: none;
+            }
+            .testi-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .cta-actions a,
+            .cta-actions button {
+                width: 100%;
+            }
+            .steps-new {
+                gap: 0;
+            }
+            .steps::before {
+                display: none;
             }
         }
+        /* =========================
+   SMALL PHONES
+========================= */
         
-        @media(max-width:540px) {
+        @media (max-width: 540px) {
+            nav {
+                padding: .9rem .75rem;
+            }
+            nav svg {
+                width: 115px;
+                height: auto;
+            }
+            section {
+                padding: 4rem 1rem;
+            }
+            .hero {
+                padding: 7rem 1rem 3rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+                line-height: 1.1;
+            }
+            .hero>p {
+                font-size: .9rem;
+            }
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .hero-actions .btn-primary,
+            .hero-actions .btn-ghost {
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-stats {
+                gap: 1.5rem;
+            }
+            .stat-n {
+                font-size: 1.8rem;
+            }
+            .sec-title {
+                font-size: 1.8rem;
+            }
+            .sec-desc {
+                font-size: .9rem;
+            }
+            .feat-card,
+            .vault-card,
+            .gpa-card,
+            .plan-card,
+            .tc,
+            .signin-card {
+                padding: 1.25rem;
+            }
             .step-new-body {
-                padding-bottom: 1.75rem
+                padding-bottom: 1.75rem;
+            }
+            .step-new-title {
+                font-size: 1rem;
             }
             .form-row {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
             }
             .check-group {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
+            }
+            .mobile-menu a {
+                font-size: 1.2rem;
+            }
+            .faq-q {
+                padding: 1rem;
+                font-size: .85rem;
+            }
+            .faq-item.open .faq-a {
+                padding: 0 1rem 1rem;
+            }
+            .modal {
+                padding: 1rem;
+            }
+            .form-actions {
+                flex-direction: column;
+            }
+            .btn-form,
+            .btn-back,
+            .btn-plan,
+            .btn-form-full {
+                width: 100%;
+            }
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .foot-links {
+                flex-wrap: wrap;
+                justify-content: center;
             }
         }
     </style>
@@ -2088,7 +2217,7 @@
     <!-- NAV -->
     <nav role="navigation" aria-label="Main navigation">
         <a href="/" aria-label="EduFlow home">
-            <svg width="201" height="39" viewBox="0 0 155 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg width="" height="39" viewBox="0 0 155 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <rect x="0" y="1" width="28" height="28" rx="7" fill="#7c3aed"/>
       <rect x="6" y="7.5" width="14" height="2.5" rx="1.25" fill="white"/>
       <rect x="6" y="13.75" width="10" height="2.5" rx="1.25" fill="white"/>
