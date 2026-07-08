@@ -101,13 +101,17 @@ document.getElementById('google-signin')?.addEventListener('click', async () => 
   const btn = document.getElementById('google-signin')
   hideAuthError()
   setGoogleLoading(btn, true)
-
   try {
     await signInWithGoogle()
-    // Page will redirect — loading state stays until navigation
   } catch (err) {
     setGoogleLoading(btn, false)
-    showAuthError(getFriendlyError(err.message))
+    const msg = err?.message || ''
+    const isCancelled = msg.includes('popup_closed') || msg.includes('cancelled') ||
+                        msg.includes('access_denied') || msg.includes('user_cancelled')
+    showAuthError(isCancelled
+      ? 'Google sign-in was cancelled. Please try again.'
+      : friendlyError(msg)
+    )
   }
 })
 
