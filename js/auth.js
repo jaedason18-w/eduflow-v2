@@ -96,3 +96,5 @@ export async function redirectIfLoggedIn(destination = '/dashboard.html') {
     window.location.href = destination
   }
 }
+
+export { supabase }

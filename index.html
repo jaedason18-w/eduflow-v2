@@ -2961,7 +2961,7 @@
                 <div class="success-screen">
                     <div class="success-icon" aria-hidden="true"><i class="ri-graduation-cap-line" style="font-size:2rem;color:#fff"></i></div>
                     <h2 class="success-title">You're on the list!</h2>
-                    <p class="success-sub" id="success-msg">Welcome to EduFlow. We'll send your early access link soon.</p>
+                    <div class="success-sub" id="success-msg">Check your email for a confirmation link to activate your account.</div>p>                    
                     <button class="btn-form" id="success-close" type="button" style="display:inline-block;width:auto;padding:.8rem 2rem">Back to EduFlow →</button>
                 </div>
             </div>
@@ -3262,11 +3262,12 @@
         });
         document.getElementById('step3-back').addEventListener('click', () => showStep(2));
         document.getElementById('step3-submit').addEventListener('click', () => {
-            const fname = document.getElementById('fname').value.trim() || 'there',
-                email = document.getElementById('email').value.trim();
-            document.getElementById('success-msg').textContent = `Welcome, ${fname}! We'll send your early access link to ${email} very soon.`;
-            showStep(4);
-        });
+    const fname = document.getElementById('fname').value.trim() || 'there',
+        email = document.getElementById('email').value.trim();
+    document.getElementById('success-msg').textContent = `Welcome, ${fname}! Check ${email} for a confirmation link to activate your account.`;
+    showStep(4);
+    setTimeout(() => { closeModal(); window.location.href = '/pages/login.html'; }, 3000);
+});
 
         /* ===== PASSWORD TOGGLE (MODAL) ===== */
         const pwdInput = document.getElementById('pwd'),
