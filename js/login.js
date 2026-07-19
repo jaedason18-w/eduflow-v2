@@ -2,7 +2,7 @@
 // EduFlow — Login Page Logic
 // ============================================
 
-import { signIn, signInWithGoogle, redirectIfLoggedIn } from './auth.js'
+import { signIn, signInWithGoogle, redirectIfLoggedIn, getSession } from './auth.js'
 import { validateForm, attachLiveValidation } from './validate.js'
 
 redirectIfLoggedIn('/dashboard.html')
@@ -110,7 +110,7 @@ document.getElementById('google-signin')?.addEventListener('click', async () => 
                         msg.includes('access_denied') || msg.includes('user_cancelled')
     showAuthError(isCancelled
       ? 'Google sign-in was cancelled. Please try again.'
-      : friendlyError(msg)
+      : getFriendlyError(msg)
     )
   }
 })

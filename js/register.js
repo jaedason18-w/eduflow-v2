@@ -68,7 +68,8 @@ function updateIndicator(n) {
     [1, 2, 3].forEach(i => {
         const rs = document.getElementById('rs' + i)
         if (rs) rs.className = 'reg-step' + (i < n ? ' done' : i === n ? ' active' : '')
-    })[1, 2].forEach(i => {
+    })
+    ;[1, 2].forEach(i => {
         const rl = document.getElementById('rl' + i)
         if (rl) rl.className = 'rs-line' + (i < n ? ' done' : '')
     })
@@ -124,6 +125,7 @@ function validateStep2() {
 }
 
 // ---- SUBMIT ----
+// ---- SUBMIT ----
 async function handleSubmit() {
     hideAuthError()
     const btn = document.getElementById('s3-submit')
@@ -132,7 +134,8 @@ async function handleSubmit() {
     btn.disabled = true
 
     try {
-        await signUp({
+        // Get form values
+        const userData = {
             firstName: document.getElementById('fname').value.trim(),
             lastName: document.getElementById('lname').value.trim(),
             email: document.getElementById('email').value.trim(),
@@ -141,8 +144,14 @@ async function handleSubmit() {
             department: document.getElementById('dept')?.value.trim() || '',
             year: document.getElementById('yr').value,
             degree: document.getElementById('deg')?.value || '',
-            matric: document.getElementById('matric')?.value.trim() || '',
-        })[1, 2, 3].forEach(i => {
+            matric: document.getElementById('matric')?.value.trim() || ''
+        }
+
+        // Call signUp from auth.js
+        const result = await signUp(userData)
+        
+        // Hide all steps, show success
+        [1, 2, 3].forEach(i => {
             const el = document.getElementById('reg-step' + i)
             if (el) el.style.display = 'none'
         })
@@ -153,6 +162,11 @@ async function handleSubmit() {
         const email = document.getElementById('email').value.trim()
         document.getElementById('reg-success-msg').textContent =
             `Welcome, ${fname}! We sent a confirmation link to ${email}. Click it to activate your account.`
+
+        // Auto-redirect to login after 5 seconds
+        setTimeout(() => {
+            window.location.href = './login.html'
+        }, 5000)
 
     } catch (err) {
         btn.textContent = original
@@ -194,22 +208,23 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('s3-submit')?.addEventListener('click', handleSubmit)
 
     // Google sign-up
-   document.getElementById('google-signup')?.addEventListener('click', async () => {
-  const btn = document.getElementById('google-signup')
-  hideAuthError()
-  setGoogleLoading(btn, true)
-  try {
-    await signInWithGoogle()
-  } catch (err) {
-    setGoogleLoading(btn, false)
-    const msg = err?.message || ''
-    const isCancelled = msg.includes('popup_closed') || msg.includes('cancelled') ||
-                        msg.includes('access_denied') || msg.includes('user_cancelled')
-    showAuthError(isCancelled
-      ? 'Google sign-up was cancelled. Please try again.'
-      : friendlyError(msg)
-    )
-  }
+document.getElementById('google-signup')?.addEventListener('click', async () => {
+    const btn = document.getElementById('google-signup')
+    hideAuthError()
+    setGoogleLoading(btn, true)
+    try {
+        await signInWithGoogle()
+        // User will be redirected to dashboard after Google auth
+    } catch (err) {
+        setGoogleLoading(btn, false)
+        const msg = err?.message || ''
+        const isCancelled = msg.includes('popup_closed') || msg.includes('cancelled') ||
+                            msg.includes('access_denied') || msg.includes('user_cancelled')
+        showAuthError(isCancelled
+            ? 'Google sign-up was cancelled. Please try again.'
+            : getFriendlyError(msg)
+        )
+    }
 })
     // Password toggle
     const pwdInput = document.getElementById('pwd')

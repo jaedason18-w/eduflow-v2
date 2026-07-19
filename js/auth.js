@@ -5,7 +5,8 @@
 import { supabase } from './supabase.js'
 
 // ---- SIGN UP WITH EMAIL ----
-export async function signUp({ firstName, lastName, email, password, university, department, year, degree }) {
+// ---- SIGN UP WITH EMAIL ----
+export async function signUp({ firstName, lastName, email, password, university, department, year, degree, matric }) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -18,6 +19,7 @@ export async function signUp({ firstName, lastName, email, password, university,
         department,
         year,
         degree,
+        matric, 
       },
       emailRedirectTo: window.location.origin + '/pages/login.html'
     }

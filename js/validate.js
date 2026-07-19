@@ -16,6 +16,9 @@ export const PATTERNS = {
   // Username: alphanumeric + underscores, 3–20 chars
   username: /^[a-zA-Z0-9_]{3,20}$/,
 
+  // Matric: various formats (CSC/2021/001, 20210234, etc.)
+  matric: /^[A-Za-z0-9\/\-]{4,20}$/,
+
   // OTP: exactly 6 digits
   otp: /^\d{6}$/,
 }
@@ -41,6 +44,10 @@ export const MESSAGES = {
     invalid: 'Username can only contain letters, numbers, and underscores.',
     tooShort: 'Username must be at least 3 characters.',
     tooLong: 'Username must be 20 characters or fewer.',
+  },
+   matric: {
+    required: 'Matriculation number is required.',
+    invalid: 'Please enter a valid matric number (e.g. CSC/2021/001 or 20210234).',
   },
   otp: {
     required: 'Verification code is required.',
@@ -85,6 +92,15 @@ export function validate(type, value, options = {}) {
       if (v.length < 3) return fail(MESSAGES.username.tooShort)
       if (v.length > 20) return fail(MESSAGES.username.tooLong)
       if (!PATTERNS.username.test(v)) return fail(MESSAGES.username.invalid)
+      return pass()
+
+    case 'matric':
+    if (!v) return fail(MESSAGES.matric.required)
+    if (!PATTERNS.matric.test(v)) return fail(MESSAGES.matric.invalid)
+    return pass()
+
+    default:
+      if (!v) return fail('This field is required.')
       return pass()
 
     case 'otp':
