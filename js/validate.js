@@ -2,70 +2,28 @@
 // EduFlow — Regex Validation Module
 // ============================================
 
-// ---- REGEX PATTERNS ----
 export const PATTERNS = {
-  // Email: standard format user@domain.tld
-  email: /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/,
-
-  // Password: min 8 chars, at least 1 uppercase, 1 lowercase, 1 digit, 1 special char
+  email:    /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/,
   password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]{8,}$/,
-
-  // Name: letters only plus spaces, apostrophes, hyphens (e.g. "Mary-Jane O'Brien")
-  name: /^[a-zA-ZÀ-ÿ]+([ '\-][a-zA-ZÀ-ÿ]+)*$/,
-
-  // Username: alphanumeric + underscores, 3–20 chars
+  name:     /^[a-zA-ZÀ-ÿ]+([ '\-][a-zA-ZÀ-ÿ]+)*$/,
   username: /^[a-zA-Z0-9_]{3,20}$/,
-
-  // Matric: various formats (CSC/2021/001, 20210234, etc.)
-  matric: /^[A-Za-z0-9\/\-]{4,20}$/,
-
-  // OTP: exactly 6 digits
-  otp: /^\d{6}$/,
+  matric:   /^[A-Za-z0-9\/\-]{4,20}$/,
+  otp:      /^\d{6}$/,
 }
 
-// ---- ERROR MESSAGES ----
 export const MESSAGES = {
-  email: {
-    required: 'Email address is required.',
-    invalid: 'Please enter a valid email address (e.g. name@university.edu).',
-  },
-  password: {
-    required: 'Password is required.',
-    weak: 'Password must be at least 8 characters and include an uppercase letter, lowercase letter, number, and special character (e.g. @, #, !).',
-    mismatch: 'Passwords do not match.',
-  },
-  name: {
-    required: 'This field is required.',
-    invalid: "Name can only contain letters, spaces, apostrophes, and hyphens (e.g. Mary-Jane O'Brien).",
-    tooShort: 'Name must be at least 2 characters.',
-  },
-  username: {
-    required: 'Username is required.',
-    invalid: 'Username can only contain letters, numbers, and underscores.',
-    tooShort: 'Username must be at least 3 characters.',
-    tooLong: 'Username must be 20 characters or fewer.',
-  },
-   matric: {
-    required: 'Matriculation number is required.',
-    invalid: 'Please enter a valid matric number (e.g. CSC/2021/001 or 20210234).',
-  },
-  otp: {
-    required: 'Verification code is required.',
-    invalid: 'Please enter the 6-digit code sent to your email.',
-  },
+  email:    { required: 'Email address is required.', invalid: 'Please enter a valid email address (e.g. name@university.edu).' },
+  password: { required: 'Password is required.', weak: 'Password must be at least 8 characters and include an uppercase letter, lowercase letter, number, and special character (e.g. @, #, !).', mismatch: 'Passwords do not match.' },
+  name:     { required: 'This field is required.', invalid: "Name can only contain letters, spaces, apostrophes, and hyphens.", tooShort: 'Name must be at least 2 characters.' },
+  username: { required: 'Username is required.', invalid: 'Username can only contain letters, numbers, and underscores.', tooShort: 'Username must be at least 3 characters.', tooLong: 'Username must be 20 characters or fewer.' },
+  matric:   { required: 'Matriculation number is required.', invalid: 'Please enter a valid matric number (e.g. CSC/2021/001 or 20210234).' },
+  otp:      { required: 'Verification code is required.', invalid: 'Please enter the 6-digit code sent to your email.' },
 }
 
-// ---- CORE VALIDATOR ----
-
-/**
- * Validate a single field value against a type.
- * Returns { valid: boolean, message: string }
- */
 export function validate(type, value, options = {}) {
   const v = (value || '').trim()
 
   switch (type) {
-
     case 'email':
       if (!v) return fail(MESSAGES.email.required)
       if (!PATTERNS.email.test(v)) return fail(MESSAGES.email.invalid)
@@ -95,12 +53,8 @@ export function validate(type, value, options = {}) {
       return pass()
 
     case 'matric':
-    if (!v) return fail(MESSAGES.matric.required)
-    if (!PATTERNS.matric.test(v)) return fail(MESSAGES.matric.invalid)
-    return pass()
-
-    default:
-      if (!v) return fail('This field is required.')
+      if (!v) return fail(MESSAGES.matric.required)
+      if (!PATTERNS.matric.test(v)) return fail(MESSAGES.matric.invalid)
       return pass()
 
     case 'otp':
@@ -117,30 +71,25 @@ export function validate(type, value, options = {}) {
 function pass() { return { valid: true, message: '' } }
 function fail(message) { return { valid: false, message } }
 
-// ---- PASSWORD STRENGTH SCORE ----
-// Returns 0 (empty) → 5 (very strong)
 export function passwordStrength(password) {
-  if (!password) return { score: 0, label: '', color: 'transparent', width: '0%' }
+  if (!password) return { label: '', color: 'transparent', width: '0%' }
   let score = 0
-  if (password.length >= 8) score++
+  if (password.length >= 8)  score++
   if (password.length >= 12) score++
   if (/[A-Z]/.test(password)) score++
-  if (/\d/.test(password)) score++
+  if (/\d/.test(password))   score++
   if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/.test(password)) score++
-
   const levels = [
-    { score: 0, label: '',                  color: 'transparent', width: '0%'   },
-    { score: 1, label: 'Very weak',         color: '#f87171',     width: '20%'  },
-    { score: 2, label: 'Weak',              color: '#fb923c',     width: '40%'  },
-    { score: 3, label: 'Fair',              color: '#facc15',     width: '60%'  },
-    { score: 4, label: 'Good',              color: '#a3e635',     width: '80%'  },
-    { score: 5, label: 'Strong ✓',          color: '#4ade80',     width: '100%' },
+    { label: '',           color: 'transparent', width: '0%'   },
+    { label: 'Very weak',  color: '#f87171',     width: '20%'  },
+    { label: 'Weak',       color: '#fb923c',     width: '40%'  },
+    { label: 'Fair',       color: '#facc15',     width: '60%'  },
+    { label: 'Good',       color: '#a3e635',     width: '80%'  },
+    { label: 'Strong ✓',   color: '#4ade80',     width: '100%' },
   ]
   return levels[Math.min(score, 5)]
 }
 
-// ---- FORM FIELD UI HELPER ----
-// Attach to an input to show/hide error message and toggle aria-invalid
 export function applyFieldResult(inputId, result) {
   const input = document.getElementById(inputId)
   const error = document.getElementById(inputId + '-error')
@@ -155,9 +104,6 @@ export function applyFieldResult(inputId, result) {
   return result.valid
 }
 
-// ---- VALIDATE ENTIRE FORM ----
-// Pass an array of { inputId, type, options? } objects
-// Returns true only if ALL fields pass
 export function validateForm(fields) {
   let allValid = true
   fields.forEach(({ inputId, type, options }) => {
@@ -170,15 +116,12 @@ export function validateForm(fields) {
   return allValid
 }
 
-// ---- LIVE VALIDATION ----
-// Wire real-time validation to an input on blur (and optionally on input)
 export function attachLiveValidation(inputId, type, options = {}) {
   const input = document.getElementById(inputId)
   if (!input) return
   input.addEventListener('blur', () => {
     applyFieldResult(inputId, validate(type, input.value, options))
   })
-  // Only show password strength live, not errors mid-typing
   if (type === 'password') {
     input.addEventListener('input', () => {
       const strength = passwordStrength(input.value)
@@ -186,7 +129,6 @@ export function attachLiveValidation(inputId, type, options = {}) {
       const hint = document.getElementById('pwd-strength-hint')
       if (fill) { fill.style.width = strength.width; fill.style.background = strength.color }
       if (hint) { hint.textContent = strength.label; hint.style.color = strength.color }
-      // Clear error once valid, but don't show error while typing
       if (PATTERNS.password.test(input.value)) {
         applyFieldResult(inputId, { valid: true, message: '' })
       }
